@@ -28,10 +28,10 @@ export function ArgumentsIsNotNullOrUndefined(config?: IConfig): any {
     };
 
     // @ts-ignore
-    return function (target: Function, key: string, descriptor: TypedPropertyDescriptor<any>): any {
+    return (target: () => void, key: string, descriptor: TypedPropertyDescriptor<any>): any => {
         const originalMethod = descriptor.value;
 
-        descriptor.value = function (...args: any[]) {
+        descriptor.value = (...args: any[]) => {
             if (Array.isArray(args) && args.length > 0) {
                 if (configuration.count > 0 && configuration.count > args.length) {
                     createErrorMessage(`Count and length of args is not correct!`, configuration.typeOfError);
