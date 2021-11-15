@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/Karbashevskyi/package-ts-decorators-asserts/issues"
   },
-  "homepage": "https://github.com/Karbashevskyi/package-ts-decorators-asserts#readme"
+  "homepage": "https://github.com/Karbashevskyi/package-ts-decorators-asserts#readme",
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
 }
