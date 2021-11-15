@@ -4,5 +4,5 @@ Package with decorators in typescript language.
 ```
   @CheckArgumentsOfMethod()
   OR
-  @CheckArgumentsOfMethod(2)
+  @CheckArgumentsOfMethod({count: 2, typeOfError: TypeOfErrorEnum.CONSOLE})
 ```
