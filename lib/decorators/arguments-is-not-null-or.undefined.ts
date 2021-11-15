@@ -1,3 +1,5 @@
+import {NGXMethodDecorator} from '../core';
+
 export enum TypeOfErrorEnum {
     IGNORE,
     THROW,
@@ -9,6 +11,8 @@ export interface IConfig {
     typeOfError?: TypeOfErrorEnum;
 }
 
+export function ArgumentsIsNotNullOrUndefined(config?: IConfig): void;
+
 /**
  *
  * @param config
@@ -19,15 +23,13 @@ export interface IConfig {
  * Example change type of error: @ArgumentsIsNotNullOrUndefined({typeOfError: TypeOfError.CONSOLE}) // Now all errors will showing in console of browser.
  *
  */
-// @ts-ignore
-export function ArgumentsIsNotNullOrUndefined(config?: IConfig): any {
+export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecorator  {
     const configuration = {
         count: 0,
         typeOfError: TypeOfErrorEnum.THROW,
         ...config,
     };
 
-    // @ts-ignore
     return (target: () => void, key: string, descriptor: TypedPropertyDescriptor<any>): any => {
         const originalMethod = descriptor.value;
 
@@ -49,7 +51,6 @@ export function ArgumentsIsNotNullOrUndefined(config?: IConfig): any {
                 }
             }
 
-            // @ts-ignore
             return originalMethod.apply(this, args);
         };
 
@@ -73,3 +74,5 @@ function createErrorMessage(message: string = 'Error', typeOfError: TypeOfErrorE
         }
     }
 }
+
+ArgumentsIsNotNullOrUndefined();

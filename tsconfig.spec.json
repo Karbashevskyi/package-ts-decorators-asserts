@@ -1,0 +1,47 @@
+{
+    "compileOnSave": false,
+    "files": [
+        "src/test.ts"
+    ],
+    "include": [
+        "**/*.spec.ts",
+        "**/*.d.ts"
+    ],
+    "compilerOptions": {
+        "outDir": "../out-tsc/spec",
+        "types": [
+            "jasmine",
+            "node"
+        ],
+        "baseUrl": "./",
+        "sourceMap": true,
+        "declaration": false,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2018",
+            "dom"
+        ],
+        "paths": {
+            "decorators": [
+                "src/lib"
+            ],
+            "decorators/*": [
+                "src/lib/*"
+            ],
+            "core": [
+                "dist/core"
+            ],
+            "core/*": [
+                "dist/core/*"
+            ]
+        }
+    }
+}

@@ -28,3 +28,4 @@
 //     const testClass = new TestModel();
 //     expect(testClass.testMethodFive('Hello', 1, [])).toBe('Hello');
 // });
+//# sourceMappingURL=check-arguments-of-method.decorator.test.js.map
