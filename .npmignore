@@ -11,3 +11,7 @@ config.gypi
 CVS
 npm-debug.log
 ./dist
+src
+tsconfig.json
+tslint.json
+.prettierrc
