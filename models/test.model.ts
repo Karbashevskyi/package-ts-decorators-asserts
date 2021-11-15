@@ -1,27 +1,27 @@
-import {CheckArgumentsOfMethodDecorator, TypeOfErrorEnum} from '../src/decorators/check-arguments-of-method.decorator';
+import {ArgumentsIsNotNullOrUndefined, TypeOfErrorEnum} from '../src/decorators/arguments-is-not-null-or.undefined';
 
 export class TestModel {
 
-    @CheckArgumentsOfMethodDecorator()
+    @ArgumentsIsNotNullOrUndefined()
     testMethod(argumentOne: string, argumentTwo: number, argumentThree: []) {
         return argumentOne;
     }
 
-    @CheckArgumentsOfMethodDecorator({
+    @ArgumentsIsNotNullOrUndefined({
         count: 2
     })
     testMethodTwo(argumentOne: string, argumentTwo: number, argumentThree?: []) {
         return argumentOne;
     }
 
-    @CheckArgumentsOfMethodDecorator({
+    @ArgumentsIsNotNullOrUndefined({
         count: 1
     })
     testMethodThree(argumentOne: string, argumentTwo?: number, argumentThree?: []) {
         return argumentOne;
     }
 
-    @CheckArgumentsOfMethodDecorator({
+    @ArgumentsIsNotNullOrUndefined({
         count: 1,
         typeOfError: TypeOfErrorEnum.IGNORE
     })
@@ -29,7 +29,7 @@ export class TestModel {
         return argumentOne;
     }
 
-    @CheckArgumentsOfMethodDecorator({
+    @ArgumentsIsNotNullOrUndefined({
         count: 2,
         typeOfError: TypeOfErrorEnum.CONSOLE
     })

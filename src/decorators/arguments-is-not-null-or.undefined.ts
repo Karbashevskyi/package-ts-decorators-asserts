@@ -14,22 +14,22 @@ export interface IConfig {
  * @param config
  * @constructor
  *
- * Example default: @CheckArgumentsOfMethodDecorator()
- * Example change count for check arguments: @CheckArgumentsOfMethodDecorator({count: 2}) // Now decorator will check only first 2 arguments from args array.
- * Example change type of error: @CheckArgumentsOfMethodDecorator({typeOfError: TypeOfError.CONSOLE}) // Now all errors will showing in console of browser.
+ * Example default: @ArgumentsIsNotNullOrUndefined()
+ * Example change count for check arguments: @ArgumentsIsNotNullOrUndefined({count: 2}) // Now decorator will check only first 2 arguments from args array.
+ * Example change type of error: @ArgumentsIsNotNullOrUndefined({typeOfError: TypeOfError.CONSOLE}) // Now all errors will showing in console of browser.
  *
  */
-export function CheckArgumentsOfMethodDecorator(config?: IConfig): any {
+export function ArgumentsIsNotNullOrUndefined(config?: IConfig): any {
     const configuration = {
         count: 0,
         typeOfError: TypeOfErrorEnum.THROW,
         ...config,
     };
 
-    return (target: any, key: string, descriptor: TypedPropertyDescriptor<any>): any => {
+    return function (target: any, key: string, descriptor: TypedPropertyDescriptor<any>): any {
         const originalMethod = descriptor.value;
 
-        descriptor.value = (...args: any[]) => {
+        descriptor.value = function (...args: any[]) {
             if (Array.isArray(args) && args.length > 0) {
                 if (configuration.count > 0 && configuration.count > args.length) {
                     createErrorMessage(`Count and length of args is not correct!`, configuration.typeOfError);
