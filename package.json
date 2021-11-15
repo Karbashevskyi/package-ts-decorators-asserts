@@ -1,0 +1,23 @@
+{
+  "name": "package-ts-decorators-asserts",
+  "version": "1.0.0",
+  "description": "Package with decorators in typescript language.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublish": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Karbashevskyi/package-ts-decorators-asserts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Karbashevskyi/package-ts-decorators-asserts/issues"
+  },
+  "homepage": "https://github.com/Karbashevskyi/package-ts-decorators-asserts#readme"
+}
