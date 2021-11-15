@@ -19,6 +19,7 @@ export interface IConfig {
  * Example change type of error: @ArgumentsIsNotNullOrUndefined({typeOfError: TypeOfError.CONSOLE}) // Now all errors will showing in console of browser.
  *
  */
+// @ts-ignore
 export function ArgumentsIsNotNullOrUndefined(config?: IConfig): any {
     const configuration = {
         count: 0,
@@ -26,7 +27,8 @@ export function ArgumentsIsNotNullOrUndefined(config?: IConfig): any {
         ...config,
     };
 
-    return function (target: any, key: string, descriptor: TypedPropertyDescriptor<any>): any {
+    // @ts-ignore
+    return function (target: Function, key: string, descriptor: TypedPropertyDescriptor<any>): any {
         const originalMethod = descriptor.value;
 
         descriptor.value = function (...args: any[]) {
