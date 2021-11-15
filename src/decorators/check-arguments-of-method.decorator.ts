@@ -2,10 +2,22 @@ export enum TypeOfErrorEnum {
     THROW,
     CONSOLE
 }
+
 export interface IConfig {
     count?: number;
     typeOfError?: TypeOfErrorEnum
 }
+
+/**
+ *
+ * @param config
+ * @constructor
+ *
+ * Example default: @CheckArgumentsOfMethodDecorator()
+ * Example change count for check arguments: @CheckArgumentsOfMethodDecorator({count: 2}) // Now decorator will check only first 2 arguments from args array.
+ * Example change type of error: @CheckArgumentsOfMethodDecorator({typeOfError: TypeOfError.CONSOLE}) // Now all errors will showing in console of browser.
+ *
+ */
 export function CheckArgumentsOfMethodDecorator(config: IConfig): any {
 
     const configuration = {
@@ -43,6 +55,12 @@ export function CheckArgumentsOfMethodDecorator(config: IConfig): any {
         return descriptor;
     }
 }
+
+/**
+ *
+ * @param message
+ * @param typeOfError
+ */
 function createErrorMessage(message: string = 'Error', typeOfError: TypeOfErrorEnum) {
     switch (typeOfError) {
         case TypeOfErrorEnum.THROW:
