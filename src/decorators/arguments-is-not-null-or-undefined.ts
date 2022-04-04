@@ -17,8 +17,12 @@ export interface IConfig {
  * @param config has interface IConfig
  *
  * Example default: @ArgumentsIsNotNullOrUndefined()
- * Example change count for check arguments: @ArgumentsIsNotNullOrUndefined({count: 2}) // Now decorator will check only first 2 arguments from args array.
- * Example change type of error: @ArgumentsIsNotNullOrUndefined({typeOfError: TypeOfError.CONSOLE}) // Now all errors will showing in console of browser.
+ *
+ * Now decorator will check only first 2 arguments from args array.
+ * Example change count for check arguments: @ArgumentsIsNotNullOrUndefined({count: 2})
+ *
+ * Now all errors will show in console of browser.
+ * Example change type of error: @ArgumentsIsNotNullOrUndefined({typeOfError: TypeOfError.CONSOLE})
  *
  */
 export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecorator  { // TODO interface
