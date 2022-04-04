@@ -2,8 +2,8 @@
   "name": "package-ts-decorators-asserts",
   "version": "1.1.0",
   "description": "Package with decorators in typescript language.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Karbashevskyi/package-ts-decorators-asserts.git"
@@ -37,6 +37,11 @@
     "typescript": "^4.6.3"
   },
   "scripts": {
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "version" : "npm run format && git add -A src",
+    "postversion" : "git push && git push --tags",
     "test": "jest --config jestconfig.json",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
