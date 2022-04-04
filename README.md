@@ -1,8 +1,13 @@
 # package-ts-decorators-asserts
 Package with decorators in typescript language.
 
-Enum for type of showing error or ignore.
+Import
+```typescript
+import {ArgumentsIsNotNullOrUndefined} from "package-ts-decorators-asserts";
 ```
+
+Enum for type of showing error or ignore.
+```typescript
 export enum TypeOfErrorEnum {
     IGNORE,
     THROW,
@@ -11,15 +16,16 @@ export enum TypeOfErrorEnum {
 ```
 
 Interface for configuration decorator
-```
+```typescript
 export interface IConfig {
     count?: number;
     typeOfError?: TypeOfErrorEnum;
+    itemCheckedList?: any[]; // Default is [undefined, null]
 }
 ```
 
 Example for using
-```
+```typescript
   class Model {
 
     @ArgumentsIsNotNullOrUndefined()
