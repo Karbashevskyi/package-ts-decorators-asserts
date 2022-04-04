@@ -18,7 +18,7 @@
       "element",
       "lib",
       "kebab-case"
-    ]
+    ],
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {
