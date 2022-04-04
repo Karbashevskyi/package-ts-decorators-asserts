@@ -1,4 +1,4 @@
-// import {ArgumentsIsNotNullOrUndefined, TypeOfErrorEnum} from '../../lib/decorators/arguments-is-not-null-or.undefined';
+// import {ArgumentsIsNotNullOrUndefined, TypeOfErrorEnum} from '../../src/decorators/arguments-is-not-null-or.undefined';
 //
 // export class TestModel {
 //
