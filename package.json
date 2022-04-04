@@ -20,7 +20,7 @@
     "url": "https://github.com/Karbashevskyi/package-ts-decorators-asserts/issues"
   },
   "files": [
-    "dist/**/*"
+    "lib/**/*"
   ],
   "homepage": "https://github.com/Karbashevskyi/package-ts-decorators-asserts#readme",
   "peerDependencies": {
