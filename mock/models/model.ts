@@ -1,26 +1,7 @@
-# package-ts-decorators-asserts
-Package with decorators in typescript language.
+import {ArgumentsIsNotNullOrUndefined, TypeOfErrorEnum} from "../../lib";
 
-Enum for type of showing error or ignore.
-```
-export enum TypeOfErrorEnum {
-    IGNORE,
-    THROW,
-    CONSOLE,
-}
-```
 
-Interface for configuration decorator
-```
-export interface IConfig {
-    count?: number;
-    typeOfError?: TypeOfErrorEnum;
-}
-```
-
-Example for using
-```
-  class Model {
+export class Model {
 
     @ArgumentsIsNotNullOrUndefined()
     testMethod(argumentOne: string, argumentTwo: number, argumentThree: []) {
@@ -28,35 +9,33 @@ Example for using
     }
 
     @ArgumentsIsNotNullOrUndefined({
-        count: 2 // Check only argumentOne and argumentTwo
+        count: 2
     })
     testMethodTwo(argumentOne: string, argumentTwo: number, argumentThree?: []) {
         return argumentOne;
     }
 
     @ArgumentsIsNotNullOrUndefined({
-        count: 1 // Check only argumentOne
+        count: 1
     })
     testMethodThree(argumentOne: string, argumentTwo?: number, argumentThree?: []) {
         return argumentOne;
     }
 
     @ArgumentsIsNotNullOrUndefined({
-        count: 1, // Check only argumentOne
-        typeOfError: TypeOfErrorEnum.IGNORE // Not showing error
+        count: 1,
+        typeOfError: TypeOfErrorEnum.IGNORE
     })
     testMethodFour(argumentOne: string, argumentTwo: number, argumentThree?: []) {
         return argumentOne;
     }
 
     @ArgumentsIsNotNullOrUndefined({
-        count: 2, // Check only argumentOne and argumentTwo
-        typeOfError: TypeOfErrorEnum.CONSOLE // Showing error in console
+        count: 2,
+        typeOfError: TypeOfErrorEnum.CONSOLE
     })
     testMethodFive(argumentOne: string, argumentTwo: number, argumentThree?: []) {
         return argumentOne;
     }
 
 }
-
-```
