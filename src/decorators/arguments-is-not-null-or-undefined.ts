@@ -1,15 +1,15 @@
-import {NGXMethodDecorator, NGXTypedPropertyDescriptor} from '../core';
+import { NGXMethodDecorator, NGXTypedPropertyDescriptor } from '../core';
 
 export enum TypeOfErrorEnum {
-    IGNORE,
-    THROW,
-    CONSOLE,
+  IGNORE,
+  THROW,
+  CONSOLE,
 }
 
 export interface IConfig {
-    count?: number;
-    typeOfError?: TypeOfErrorEnum;
-    itemCheckedList?: any[];
+  count?: number;
+  typeOfError?: TypeOfErrorEnum;
+  itemCheckedList?: any[];
 }
 
 /**
@@ -25,50 +25,44 @@ export interface IConfig {
  * Example change type of error: @ArgumentsIsNotNullOrUndefined({typeOfError: TypeOfError.CONSOLE})
  *
  */
-export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecorator  { // TODO interface
-    const configuration = {
-        count: 0,
-        typeOfError: TypeOfErrorEnum.THROW,
-        itemCheckedList: [undefined, null],
-        ...config,
+export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecorator {
+  // TODO interface
+  const configuration = {
+    count: 0,
+    typeOfError: TypeOfErrorEnum.THROW,
+    itemCheckedList: [undefined, null],
+    ...config,
+  };
+
+  return (
+    target: object,
+    propertyKey: string | symbol,
+    descriptor: NGXTypedPropertyDescriptor<any>,
+  ): NGXTypedPropertyDescriptor<any> => {
+    const originalMethod = descriptor.value;
+
+    descriptor.value = (...args: any[]) => {
+      if (Array.isArray(args) && args.length > 0) {
+        if (configuration.count > 0 && configuration.count > args.length) {
+          createErrorMessage(`Count and length of args is not correct!`, configuration.typeOfError);
+        }
+
+        const argsCopy = [...args];
+
+        if (configuration.count > 0) {
+          argsCopy.length = configuration.count;
+        }
+
+        if (argsCopy.some((item: any) => configuration.itemCheckedList.includes(item))) {
+          createErrorMessage(`Argument of method ${String(propertyKey)} is empty!`, configuration.typeOfError);
+        }
+      }
+
+      return originalMethod.apply(this, args); // this: "noImplicitThis": false,
     };
 
-    return (
-        target: object,
-        propertyKey: string | symbol,
-        descriptor: NGXTypedPropertyDescriptor<any>
-    ): NGXTypedPropertyDescriptor<any> => {
-        const originalMethod = descriptor.value;
-
-        descriptor.value = (...args: any[]) => {
-            if (Array.isArray(args) && args.length > 0) {
-                if (configuration.count > 0 && configuration.count > args.length) {
-                    createErrorMessage(
-                        `Count and length of args is not correct!`,
-                        configuration.typeOfError
-                    );
-                }
-
-                const argsCopy = [...args];
-
-                if (configuration.count > 0) {
-                    argsCopy.length = configuration.count;
-                }
-
-                if (argsCopy.some((item: any) => configuration.itemCheckedList.includes(item))) {
-                    createErrorMessage(
-                        `Argument of method ${String(propertyKey)} is empty!`,
-                        configuration.typeOfError
-                    );
-                }
-
-            }
-
-            return originalMethod.apply(this, args); // this: "noImplicitThis": false,
-        };
-
-        return descriptor;
-    };
+    return descriptor;
+  };
 }
 
 /**
@@ -77,15 +71,15 @@ export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecora
  * @param typeOfError choice your method showing of error
  */
 function createErrorMessage(message: string = 'Error', typeOfError: TypeOfErrorEnum) {
-    if (typeOfError) {
-        switch (typeOfError) {
-            case TypeOfErrorEnum.THROW:
-                throw new Error(message);
-            case TypeOfErrorEnum.CONSOLE:
-                console.assert(false, message);
-                break;
-        }
+  if (typeOfError) {
+    switch (typeOfError) {
+      case TypeOfErrorEnum.THROW:
+        throw new Error(message);
+      case TypeOfErrorEnum.CONSOLE:
+        console.assert(false, message);
+        break;
     }
+  }
 }
 
 // ArgumentsIsNotNullOrUndefined();

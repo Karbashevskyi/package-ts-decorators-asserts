@@ -1,1 +1,1 @@
-export {NGXTypedPropertyDescriptor, NGXClassPropertyDecorator, NGXMethodDecorator} from './types';
+export { NGXTypedPropertyDescriptor, NGXClassPropertyDecorator, NGXMethodDecorator } from './types';
