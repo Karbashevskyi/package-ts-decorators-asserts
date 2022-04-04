@@ -26,7 +26,6 @@ export interface IConfig {
  *
  */
 export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecorator {
-  // TODO interface
   const configuration = {
     count: 0,
     typeOfError: TypeOfErrorEnum.THROW,

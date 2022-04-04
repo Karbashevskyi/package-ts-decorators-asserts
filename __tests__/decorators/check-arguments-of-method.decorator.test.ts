@@ -4,31 +4,47 @@ describe('Testing of decorator check-arguments', () => {
 
     let testClass: Model;
 
+    const arrWithDataToTest: any[] = [null, undefined, 'null', 'undefined', 'test'];
+
     beforeAll(() => {
         testClass = new Model();
     })
 
-    test('testMethod', () => {
+    it('testMethod', () => {
         expect(testClass.testMethod('Hello', 1, [])).toBe('Hello');
     });
 
-    test('Argument of method testMethodTwo is empty!', () => {
+    it('Argument of method testMethodTwo is empty!', () => {
         expect(() => {
             // @ts-ignore
             testClass.testMethodTwo('Hello', undefined, [])
         }).toThrow('Argument of method testMethodTwo is empty!');
     });
 
-    test('testMethodThree', () => {
+    it('testMethodThree', () => {
         expect(testClass.testMethodThree('Hello', 1, [])).toBe('Hello');
     });
 
-    test('testMethodFour', () => {
+    it('testMethodFour', () => {
         expect(testClass.testMethodFour('Hello', 1, [])).toBe('Hello');
     });
 
-    test('testMethodFive', () => {
+    it('testMethodFive', () => {
         expect(testClass.testMethodFive('Hello', 1, [])).toBe('Hello');
+    });
+
+    it.each(arrWithDataToTest)('testMethodSix | %p', (itemFromTheList: any) => {
+
+        expect(() => {
+            testClass.testMethodSix(
+                itemFromTheList,
+                itemFromTheList,
+                itemFromTheList,
+                itemFromTheList,
+                itemFromTheList
+            )
+        }).toThrow('Argument of method testMethodSix is empty!');
+
     });
 
 });
