@@ -1,4 +1,4 @@
-import {NGXMethodDecorator, NGXTypedPropertyDescriptor} from "../core";
+import {NGXMethodDecorator, NGXTypedPropertyDescriptor} from '../core';
 
 export enum TypeOfErrorEnum {
     IGNORE,
@@ -14,8 +14,7 @@ export interface IConfig {
 
 /**
  *
- * @param config
- * @constructor
+ * @param config has interface IConfig
  *
  * Example default: @ArgumentsIsNotNullOrUndefined()
  * Example change count for check arguments: @ArgumentsIsNotNullOrUndefined({count: 2}) // Now decorator will check only first 2 arguments from args array.
@@ -30,13 +29,20 @@ export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecora
         ...config,
     };
 
-    return (target: object, propertyKey: string | symbol, descriptor: NGXTypedPropertyDescriptor<any>): NGXTypedPropertyDescriptor<any> => {
+    return (
+        target: object,
+        propertyKey: string | symbol,
+        descriptor: NGXTypedPropertyDescriptor<any>
+    ): NGXTypedPropertyDescriptor<any> => {
         const originalMethod = descriptor.value;
 
         descriptor.value = (...args: any[]) => {
             if (Array.isArray(args) && args.length > 0) {
                 if (configuration.count > 0 && configuration.count > args.length) {
-                    createErrorMessage(`Count and length of args is not correct!`, configuration.typeOfError);
+                    createErrorMessage(
+                        `Count and length of args is not correct!`,
+                        configuration.typeOfError
+                    );
                 }
 
                 const argsCopy = [...args];
@@ -46,7 +52,10 @@ export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecora
                 }
 
                 if (argsCopy.some((item: any) => configuration.itemCheckedList.includes(item))) {
-                    createErrorMessage(`Argument of method ${String(propertyKey)} is empty!`, configuration.typeOfError);
+                    createErrorMessage(
+                        `Argument of method ${String(propertyKey)} is empty!`,
+                        configuration.typeOfError
+                    );
                 }
 
             }
@@ -60,8 +69,8 @@ export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecora
 
 /**
  *
- * @param message
- * @param typeOfError
+ * @param message is string, write you custom message
+ * @param typeOfError choice your method showing of error
  */
 function createErrorMessage(message: string = 'Error', typeOfError: TypeOfErrorEnum) {
     if (typeOfError) {
