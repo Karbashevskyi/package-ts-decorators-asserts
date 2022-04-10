@@ -8,7 +8,11 @@ describe('Testing of decorator check-arguments', () => {
 
     beforeAll(() => {
         testClass = new Model();
-    })
+    });
+
+    it('testSayHello', () => {
+        expect(testClass.testSayHello('World')).toBe('Hello World');
+    });
 
     it('testMethod', () => {
         expect(testClass.testMethod('Hello', 1, [])).toBe('Hello');

@@ -1,4 +1,3 @@
-import { NGXMethodDecorator } from '../core';
 export declare enum TypeOfErrorEnum {
     IGNORE = 0,
     THROW = 1,
@@ -8,6 +7,11 @@ export interface IConfig {
     count?: number;
     typeOfError?: TypeOfErrorEnum;
     itemCheckedList?: any[];
+}
+export interface IConfigStrict {
+    count: number;
+    typeOfError: TypeOfErrorEnum;
+    itemCheckedList: any[];
 }
 /**
  *
@@ -22,4 +26,4 @@ export interface IConfig {
  * Example change type of error: @ArgumentsIsNotNullOrUndefined({typeOfError: TypeOfError.CONSOLE})
  *
  */
-export declare function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecorator;
+export declare const ArgumentsIsNotNullOrUndefined: (config?: IConfig | undefined) => Function;

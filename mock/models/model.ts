@@ -1,7 +1,20 @@
 import {ArgumentsIsNotNullOrUndefined, TypeOfErrorEnum} from "../../lib";
 
-
 export class Model {
+
+    private readonly sayHello: string = 'Hello';
+
+    constructor() {
+    }
+
+    /**
+     *
+     * @param sayWorld
+     */
+    @ArgumentsIsNotNullOrUndefined()
+    testSayHello(sayWorld: string) {
+        return `${this.sayHello} ${sayWorld}`;
+    }
 
     /**
      *

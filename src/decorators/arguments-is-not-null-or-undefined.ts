@@ -1,4 +1,3 @@
-import { NGXMethodDecorator, NGXTypedPropertyDescriptor } from '../core';
 
 export enum TypeOfErrorEnum {
   IGNORE,
@@ -10,6 +9,12 @@ export interface IConfig {
   count?: number;
   typeOfError?: TypeOfErrorEnum;
   itemCheckedList?: any[];
+}
+
+export interface IConfigStrict {
+  count: number;
+  typeOfError: TypeOfErrorEnum;
+  itemCheckedList: any[];
 }
 
 /**
@@ -25,8 +30,8 @@ export interface IConfig {
  * Example change type of error: @ArgumentsIsNotNullOrUndefined({typeOfError: TypeOfError.CONSOLE})
  *
  */
-export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecorator {
-  const configuration = {
+export const ArgumentsIsNotNullOrUndefined = (config?: IConfig): Function => {
+  const configuration: IConfigStrict = {
     count: 0,
     typeOfError: TypeOfErrorEnum.THROW,
     itemCheckedList: [undefined, null],
@@ -34,13 +39,14 @@ export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecora
   };
 
   return (
-    target: object,
+    target: Object,
     propertyKey: string | symbol,
-    descriptor: NGXTypedPropertyDescriptor<any>,
-  ): NGXTypedPropertyDescriptor<any> => {
-    const originalMethod = descriptor.value;
+    descriptor: PropertyDescriptor,
+  ): PropertyDescriptor => {
+    const originalMethod: any = descriptor.value;
 
-    descriptor.value = (...args: any[]) => {
+    descriptor.value = function (...args: any[]) {
+
       if (Array.isArray(args) && args.length > 0) {
         if (configuration.count > 0 && configuration.count > args.length) {
           createErrorMessage(`Count and length of args is not correct!`, configuration.typeOfError);
@@ -48,7 +54,7 @@ export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecora
 
         const argsCopy = [...args];
 
-        if (configuration.count > 0) {
+        if (configuration?.count > 0) {
           argsCopy.length = configuration.count;
         }
 
@@ -57,7 +63,7 @@ export function ArgumentsIsNotNullOrUndefined(config?: IConfig): NGXMethodDecora
         }
       }
 
-      return originalMethod.apply(this, args); // this: "noImplicitThis": false,
+      return originalMethod.apply(this, args);
     };
 
     return descriptor;
