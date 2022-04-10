@@ -13,6 +13,7 @@ export interface IConfigStrict {
     typeOfError: TypeOfErrorEnum;
     itemCheckedList: any[];
 }
+export declare type ArgumentsIsNotNullOrUndefinedReturnedType = (target: Object, propertyKey: (string | symbol), descriptor: PropertyDescriptor) => PropertyDescriptor;
 /**
  *
  * @param config has interface IConfig
@@ -26,4 +27,4 @@ export interface IConfigStrict {
  * Example change type of error: @ArgumentsIsNotNullOrUndefined({typeOfError: TypeOfError.CONSOLE})
  *
  */
-export declare const ArgumentsIsNotNullOrUndefined: (config?: IConfig | undefined) => Function;
+export declare const ArgumentsIsNotNullOrUndefined: (config?: IConfig | undefined) => ArgumentsIsNotNullOrUndefinedReturnedType;
