@@ -13,7 +13,7 @@ export interface IConfigStrict {
     typeOfError: TypeOfErrorEnum;
     itemCheckedList: any[];
 }
-export declare type ArgumentsIsNotNullOrUndefinedReturnedType = (target: Object, propertyKey: (string | symbol), descriptor: PropertyDescriptor) => PropertyDescriptor;
+export declare type ArgumentsIsNotNullOrUndefinedReturnedType = (target: object, propertyKey: (string | symbol), descriptor: PropertyDescriptor) => PropertyDescriptor;
 /**
  *
  * @param config has interface IConfig
