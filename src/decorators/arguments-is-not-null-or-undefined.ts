@@ -91,5 +91,3 @@ function createErrorMessage(message: string = 'Error', typeOfError: TypeOfErrorE
         }
     }
 }
-
-// ArgumentsIsNotNullOrUndefined();
