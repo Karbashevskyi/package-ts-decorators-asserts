@@ -52,18 +52,18 @@ export const ArgumentsIsNotNullOrUndefined = (config?: IConfig): ArgumentsIsNotN
 
         descriptor.value = function (...args: any[]) {
 
-            if (Array.isArray(args) && args.length > 0) {
-                if (configuration.count > 0 && configuration.count > args.length) {
+            if (Array.isArray(args) && args?.length) {
+                if (configuration?.count > args.length) {
                     createErrorMessage(`Count and length of args is not correct!`, configuration.typeOfError);
                 }
 
                 const argsCopy = [...args];
 
-                if (configuration?.count > 0) {
+                if (configuration?.count) {
                     argsCopy.length = configuration.count;
                 }
 
-                if (argsCopy.some((item: any) => configuration.itemCheckedList.includes(item))) {
+                if (argsCopy.some((item: any) => configuration?.itemCheckedList?.includes(item))) {
                     createErrorMessage(`Argument of method ${String(propertyKey)} is empty!`, configuration.typeOfError);
                 }
             }
