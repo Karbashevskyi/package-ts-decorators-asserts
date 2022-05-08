@@ -10,11 +10,7 @@ export interface IConfig {
     itemCheckedList?: any[];
 }
 
-export interface IConfigStrict {
-    count: number;
-    typeOfError: TypeOfErrorEnum;
-    itemCheckedList: any[];
-}
+export type IConfigRequired = Required<IConfig>
 
 export type ArgumentsIsNotNullOrUndefinedReturnedType = (
     target: object,
@@ -36,7 +32,7 @@ export type ArgumentsIsNotNullOrUndefinedReturnedType = (
  *
  */
 export const ArgumentsIsNotNullOrUndefined = (config?: IConfig): ArgumentsIsNotNullOrUndefinedReturnedType => {
-    const configuration: IConfigStrict = {
+    const configuration: IConfigRequired = {
         count: 0,
         typeOfError: TypeOfErrorEnum.THROW,
         itemCheckedList: [undefined, null],

@@ -8,11 +8,7 @@ export interface IConfig {
     typeOfError?: TypeOfErrorEnum;
     itemCheckedList?: any[];
 }
-export interface IConfigStrict {
-    count: number;
-    typeOfError: TypeOfErrorEnum;
-    itemCheckedList: any[];
-}
+export declare type IConfigRequired = Required<IConfig>;
 export declare type ArgumentsIsNotNullOrUndefinedReturnedType = (target: object, propertyKey: (string | symbol), descriptor: PropertyDescriptor) => PropertyDescriptor;
 /**
  *
