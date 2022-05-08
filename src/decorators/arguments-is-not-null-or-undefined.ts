@@ -1,22 +1,22 @@
 export enum TypeOfErrorEnum {
-    IGNORE,
-    THROW,
-    CONSOLE,
+  IGNORE,
+  THROW,
+  CONSOLE,
 }
 
 export interface IConfig {
-    count?: number;
-    typeOfError?: TypeOfErrorEnum;
-    itemCheckedList?: any[];
+  count?: number;
+  typeOfError?: TypeOfErrorEnum;
+  itemCheckedList?: any[];
 }
 
-export type IConfigRequired = Required<IConfig>
+export type IConfigRequired = Required<IConfig>;
 
 export type ArgumentsIsNotNullOrUndefinedReturnedType = (
-    target: object,
-    propertyKey: (string | symbol),
-    descriptor: PropertyDescriptor
-) => PropertyDescriptor
+  target: object,
+  propertyKey: string | symbol,
+  descriptor: PropertyDescriptor,
+) => PropertyDescriptor;
 
 /**
  *
@@ -32,44 +32,39 @@ export type ArgumentsIsNotNullOrUndefinedReturnedType = (
  *
  */
 export const ArgumentsIsNotNullOrUndefined = (config?: IConfig): ArgumentsIsNotNullOrUndefinedReturnedType => {
-    const configuration: IConfigRequired = {
-        count: 0,
-        typeOfError: TypeOfErrorEnum.THROW,
-        itemCheckedList: [undefined, null],
-        ...config,
+  const configuration: IConfigRequired = {
+    count: 0,
+    typeOfError: TypeOfErrorEnum.THROW,
+    itemCheckedList: [undefined, null],
+    ...config,
+  };
+
+  return (target: object, propertyKey: string | symbol, descriptor: PropertyDescriptor): PropertyDescriptor => {
+    const originalMethod: any = descriptor.value;
+
+    descriptor.value = function (...args: any[]) {
+      if (Array.isArray(args) && args?.length) {
+        if (configuration?.count > args.length) {
+          createErrorMessage(`Count and length of args is not correct!`, configuration.typeOfError);
+        }
+
+        const argsCopy = [...args];
+
+        if (configuration?.count) {
+          argsCopy.length = configuration.count;
+        }
+
+        if (argsCopy.some((item: any) => configuration?.itemCheckedList?.includes(item))) {
+          createErrorMessage(`Argument of method ${String(propertyKey)} is empty!`, configuration.typeOfError);
+        }
+      }
+
+      return originalMethod.apply(this, args);
     };
 
-    return (
-        target: object,
-        propertyKey: string | symbol,
-        descriptor: PropertyDescriptor,
-    ): PropertyDescriptor => {
-        const originalMethod: any = descriptor.value;
-
-        descriptor.value = function (...args: any[]) {
-
-            if (Array.isArray(args) && args?.length) {
-                if (configuration?.count > args.length) {
-                    createErrorMessage(`Count and length of args is not correct!`, configuration.typeOfError);
-                }
-
-                const argsCopy = [...args];
-
-                if (configuration?.count) {
-                    argsCopy.length = configuration.count;
-                }
-
-                if (argsCopy.some((item: any) => configuration?.itemCheckedList?.includes(item))) {
-                    createErrorMessage(`Argument of method ${String(propertyKey)} is empty!`, configuration.typeOfError);
-                }
-            }
-
-            return originalMethod.apply(this, args);
-        };
-
-        return descriptor;
-    };
-}
+    return descriptor;
+  };
+};
 
 /**
  *
@@ -77,13 +72,13 @@ export const ArgumentsIsNotNullOrUndefined = (config?: IConfig): ArgumentsIsNotN
  * @param typeOfError choice your method showing of error
  */
 function createErrorMessage(message: string = 'Error', typeOfError: TypeOfErrorEnum) {
-    if (typeOfError) {
-        switch (typeOfError) {
-            case TypeOfErrorEnum.THROW:
-                throw new Error(message);
-            case TypeOfErrorEnum.CONSOLE:
-                console.assert(false, message);
-                break;
-        }
+  if (typeOfError) {
+    switch (typeOfError) {
+      case TypeOfErrorEnum.THROW:
+        throw new Error(message);
+      case TypeOfErrorEnum.CONSOLE:
+        console.assert(false, message);
+        break;
     }
+  }
 }
