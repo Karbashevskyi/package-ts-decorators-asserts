@@ -1,12 +1,25 @@
 # package-ts-decorators-asserts
 Package with decorators in typescript language.
 
-Import
+![NPM Latest Version](https://img.shields.io/npm/v/package-ts-decorators-asserts)
+![Downloads Count](https://img.shields.io/npm/dm/package-ts-decorators-asserts.svg)
+![Bundle Size](https://packagephobia.now.sh/badge?p=package-ts-decorators-asserts)
+![Test Status](https://img.shields.io/travis/karbashevskyi/package-ts-decorators-asserts/main.svg)
+![Last Update Date](https://img.shields.io/github/last-commit/karbashevskyi/package-ts-decorators-asserts)
+![Project License](https://img.shields.io/github/license/karbashevskyi/package-ts-decorators-asserts)
+
+## Installation
+
+```bash
+$ npm install package-ts-decorators-asserts
+```
+
+## Import
 ```typescript
 import {ArgumentsIsNotNullOrUndefined} from "package-ts-decorators-asserts";
 ```
 
-Enum for type of showing error or ignore.
+## Enum for type of showing error or ignore.
 ```typescript
 export enum TypeOfErrorEnum {
     IGNORE,
@@ -15,7 +28,7 @@ export enum TypeOfErrorEnum {
 }
 ```
 
-Interface for configuration decorator
+## Interface for configuration decorator
 ```typescript
 export interface IConfig {
     count?: number;
@@ -24,7 +37,7 @@ export interface IConfig {
 }
 ```
 
-Example for using
+## Examples
 ```typescript
   class Model {
 
@@ -66,3 +79,12 @@ Example for using
 }
 
 ```
+
+## My Social Network Links
+[Twitter Profile](https://twitter.com/Karbashevskyi)
+
+[LinkedIn Profile](https://www.linkedin.com/in/ivan-karbashevskyi/)
+
+[GitHub Profile](https://github.com/Karbashevskyi)
+
+[medium.com Profile](https://medium.com/@ivankarbashevskyi)

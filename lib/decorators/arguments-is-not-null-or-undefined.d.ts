@@ -9,7 +9,7 @@ export interface IConfig {
     itemCheckedList?: any[];
 }
 export declare type IConfigRequired = Required<IConfig>;
-export declare type ArgumentsIsNotNullOrUndefinedReturnedType = (target: object, propertyKey: (string | symbol), descriptor: PropertyDescriptor) => PropertyDescriptor;
+export declare type ArgumentsIsNotNullOrUndefinedReturnedType = (target: object, propertyKey: string | symbol, descriptor: PropertyDescriptor) => PropertyDescriptor;
 /**
  *
  * @param config has interface IConfig
